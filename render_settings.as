@@ -123,16 +123,12 @@ final class RenderSettings
             { "renderfx", "" + renderfx },
             { "renderamt", "" + renderamt },
             { "rendercolor", "" + rendercolor.ToString() },
-            { "spawnflags", "" + iRenderFlags }
+            { "spawnflags", "" + ( iRenderFlags | 64 ) }
         };
 
         dictRenderIndividual["target"] = hTarget.GetEntity().GetTargetname() == "" ? 
                                 string( hTarget.GetEntity().pev.targetname = string_t( "render_individual_entity_" + hTarget.GetEntity().entindex() ) ) :
                                 hTarget.GetEntity().GetTargetname();
-        
-        dictRenderIndividual["netname"] = hPlayer.GetEntity().GetTargetname() == "" ? 
-                                string( hPlayer.GetEntity().pev.targetname = string_t( "render_individual_player_" + hPlayer.GetEntity().entindex() ) ) : 
-                                hPlayer.GetEntity().GetTargetname();
 
         CBaseEntity@ pRenderIndividual = g_EntityFuncs.CreateEntity( "env_render_individual", dictRenderIndividual );
 
@@ -140,9 +136,6 @@ final class RenderSettings
             return null;
 
         pRenderIndividual.Use( hPlayer.GetEntity(), pRenderIndividual, USE_ON, 0.0f );
-
-        if( hPlayer.GetEntity().GetTargetname().StartsWith( "render_individual_" ) )
-            hPlayer.GetEntity().pev.targetname = "";
 
         if( hTarget.GetEntity().GetTargetname().StartsWith( "render_individual_" ) )
             hTarget.GetEntity().pev.targetname = "";
