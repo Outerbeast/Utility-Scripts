@@ -477,7 +477,7 @@ final class env_projectile : ScriptBaseEntity, MXNProjectiles
 
     void Use(CBaseEntity@ pActivator, CBaseEntity@ pCaller, USE_TYPE useType, float value)
 	{//TO-DO: add repeated shooting via ShootInterval
-        g_EngineFuncs.ServerPrint( " !    env_projectile    ! - " + self.GetTargetname() + " triggered.\n" );
+        //g_EngineFuncs.ServerPrint( " !    env_projectile    ! - " + self.GetTargetname() + " triggered.\n" ); // debug info
 
         switch( useType )
         {
